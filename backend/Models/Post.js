@@ -8,9 +8,6 @@ const PostSchema = new Schema({
     image: {
         type: String
     },
-    type:{
-        type:String
-    },
     date: {
         type: Date,
         default: Date.now
@@ -19,7 +16,6 @@ const PostSchema = new Schema({
         type:mongoose.Schema.Types.ObjectId, 
         required: true
     },
-  
     comments:{
         type:Number
     }
