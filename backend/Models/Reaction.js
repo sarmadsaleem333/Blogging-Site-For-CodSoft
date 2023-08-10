@@ -2,13 +2,9 @@ const mongoose = require("mongoose");
 const { Schema } = mongoose;
 const ReactionSchema = new Schema({
 
-    like: {
-        type: Boolean
-    },
     comment: {
         type: String
     },
-
     date: {
         type: Date,
         default: Date.now

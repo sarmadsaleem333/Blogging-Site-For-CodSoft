@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { validationResult,body } = require('express-validator');
+const { validationResult, body } = require('express-validator');
 const Post = require("../Models/Post");
 const fetchuser = require("../Middleware/fetchuser");
 const multer = require("multer");
@@ -34,7 +34,8 @@ router.post("/addpost", fetchuser, [
             const { text } = req.body;
             await Post.create({
                 text: text, image: imageName,
-                user: req.user.id
+                user: req.user.id,
+                comments:0
             })
             res.json("Image uploaded succesfully");
 

@@ -18,6 +18,10 @@ const PostSchema = new Schema({
     user:{
         type:mongoose.Schema.Types.ObjectId, 
         required: true
+    },
+  
+    comments:{
+        type:Number
     }
 });
 
