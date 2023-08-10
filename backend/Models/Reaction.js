@@ -13,8 +13,12 @@ const ReactionSchema = new Schema({
         type: Date,
         default: Date.now
     },
-    post:{
-        type:mongoose.Schema.Types.ObjectId, 
+    post: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true
+    },
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
         required: true
     }
 });
