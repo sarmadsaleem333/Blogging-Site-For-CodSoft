@@ -13,7 +13,7 @@ router.post("/addreaction/:id", fetchuser, async (req, res) => {
             like: like,
             comment: comment,
             post: postId,
-            user:req.user.id
+            user: req.user.id
         });
         res.send("You reacted to this post");
 
@@ -29,7 +29,7 @@ router.put("/editreaction/:id", async (req, res) => {
 
         const { like, comment } = req.body;
         const newReaction = {};
-        if (like==true || like ==false) { newReaction.like = like; }
+        if (like == true || like == false) { newReaction.like = like; }
         if (comment) { newReaction.comment = comment; }
 
         let reaction = await Reaction.findById(req.params.id);
