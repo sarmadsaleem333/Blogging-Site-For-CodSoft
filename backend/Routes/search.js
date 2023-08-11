@@ -11,13 +11,14 @@ router.get("/searchitems", fetchuser, async (req, res) => {
 
     try {
         const searchResults = await Post.find({
-     
-        $or: [
-            { text: { $regex: searchQuery, $options: 'i' } },    // Search in the "text" field
-            { type: { $regex: searchQuery, $options: 'i' } }, // Search in the "fashion" field
-          ], 
+
+            $or: [
+                { text: { $regex: searchQuery, $options: 'i' } },   
+                { topic: { $regex: searchQuery, $options: 'i' } }, 
+                { type: { $regex: searchQuery, $options: 'i' } }, 
+            ],
         });
-    
+
         res.json(searchResults);
     } catch (error) {
         console.error(error);

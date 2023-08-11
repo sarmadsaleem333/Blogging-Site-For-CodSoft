@@ -31,11 +31,13 @@ router.post("/addpost", fetchuser, [
         }
         try {
             const imageName = req.file.filename;
-            const { text } = req.body;
+            const { text,topic,type } = req.body;
             await Post.create({
                 text: text, image: imageName,
                 user: req.user.id,
-                comments:0
+                comments:0,
+                topic:topi,
+                type:type
             })
             res.json("Image uploaded succesfully");
 

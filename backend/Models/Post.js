@@ -3,7 +3,6 @@ const { Schema } = mongoose;
 const PostSchema = new Schema({
     text: {
         type: String,
-
     },
     image: {
         type: String
@@ -12,12 +11,18 @@ const PostSchema = new Schema({
         type: Date,
         default: Date.now
     },
-    user:{
-        type:mongoose.Schema.Types.ObjectId, 
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
         required: true
     },
-    comments:{
-        type:Number
+    topic: {
+        type: String
+    },
+    type: {
+        type: String
+    },
+    comments: {
+        type: Number
     }
 });
 
