@@ -21,7 +21,9 @@ const upload = multer({ storage: storage })
 
 // Route 1: Add a post by post request using url "/blogging/posts/addpost".Login required
 router.post("/addpost", fetchuser, [
-    body("text", "Enter text of atleast 10 characters").isLength({ min: 10 })], upload.single("image"),
+    body("text", "Enter text of atleast 20 characters").isLength({ min: 20 }),
+    body("topic", "Enter text of atleast 8 characters").isLength({ min: 8 }),
+], upload.single("image"),
     async (req, res) => {
         // if there are errors return the bad request
         const errors = validationResult(req);
@@ -36,7 +38,7 @@ router.post("/addpost", fetchuser, [
                 text: text, image: imageName,
                 user: req.user.id,
                 comments:0,
-                topic:topi,
+                topic:topic,
                 type:type
             })
             res.json("Image uploaded succesfully");
@@ -61,7 +63,7 @@ router.get("/getmyposts", fetchuser, async (req, res) => {
 
 router.put("/editpost/:id", fetchuser, upload.single("image"), async (req, res) => {
     try {
-        const { text } = req.body;
+        const { text,topic,type } = req.body;
         let newPost = await Post.findById(req.params.id);
         if (!newPost) {
             return res.json("The post can't be found");
@@ -71,6 +73,12 @@ router.put("/editpost/:id", fetchuser, upload.single("image"), async (req, res) 
         }
         if (text) {
             newPost.text = text;
+        }
+        if (topic) {
+            newPost.topic = topic;
+        }
+        if (type) {
+            newPost.type = type;
         }
         await Post.findByIdAndUpdate(req.params.id, { $set: newPost }, { new: true });
         res.json("Successfully! Your post has been edited");

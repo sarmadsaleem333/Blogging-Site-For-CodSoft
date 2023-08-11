@@ -117,7 +117,7 @@ router.post("/loginuser", [
 
 //Router 3: get user details by Post request"/blogging/auth/fetchuser" and providing token.Log in required.
 
-router.post("/fetchuser", fetchuser, async (req, res) => {
+router.get("/fetchuser", fetchuser, async (req, res) => {
     try {
         let userId = req.user.id;
         const user = await User.findOne({ _id: userId }).select("-password");

@@ -1,6 +1,5 @@
 const express = require("express");
 const router = express.Router();
-const Reaction = require("../Models/Reaction");
 const Post = require("../Models/Post");
 const fetchuser = require("../Middleware/fetchuser");
 
