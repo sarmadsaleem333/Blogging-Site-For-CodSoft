@@ -105,7 +105,7 @@ router.put("/deletepost/:id", async (req, res) => {
     }
 });
 
-//Route 4:Get the posts of all by post request by "/blogging/posts/getfriendsposts"
+//Route 4:Get the posts of all by post request by "/blogging/posts/getallposts"
 router.get("/getallposts", fetchuser, async (req, res) => {
     try {
         let posts = await Post.find({});
@@ -114,8 +114,17 @@ router.get("/getallposts", fetchuser, async (req, res) => {
         res.json("Error getting posts")
         console.log(error);
     }
+})
+//Route 5:Get the posts of all by post of required user request by "/blogging/posts/getpostofrequireduser/:id"
+router.get("/getpostofrequireduser/:id", fetchuser, async (req, res) => {
+    try {
 
-
+        let posts = await Post.find({user:req.params.id});
+        res.send(posts);
+    } catch (error) {
+        res.json("Error getting posts")
+        console.log(error);
+    }
 })
 
 

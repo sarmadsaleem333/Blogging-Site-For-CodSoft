@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Post = require("../Models/Post");
+const User = require("../Models/User");
 const fetchuser = require("../Middleware/fetchuser");
 
 
@@ -18,6 +19,22 @@ router.get("/searchitems", fetchuser, async (req, res) => {
             ],
         });
 
+        res.json(searchResults);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+
+})
+//Route 2: For searching items on the basis of their type by get request "/blogging/search/searchusers"
+router.get("/searchusers", fetchuser, async (req, res) => {
+    const searchQuery = req.query.q; // Get search query from query parameter
+
+    try {
+        const searchResults = await User.find({
+                name: { $regex: searchQuery, $options: 'i' } 
+        }).select("name");
+  
         res.json(searchResults);
     } catch (error) {
         console.error(error);
