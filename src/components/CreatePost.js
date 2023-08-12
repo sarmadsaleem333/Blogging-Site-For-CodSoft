@@ -1,6 +1,8 @@
 import React, { useRef, useContext, useState } from 'react'
 import Blog from './Blog'
 import postContext from '../context/postContext';
+import Alert from './Alert';
+
 
 export default function CreatePost() {
     const closeRef = useRef(null);
@@ -35,6 +37,7 @@ export default function CreatePost() {
     }
     return (
         <div>
+            <Alert/>
             
             <div className="modal fade" id="create-post-model" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div className="modal-dialog">
