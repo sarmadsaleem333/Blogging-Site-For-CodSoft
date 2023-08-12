@@ -45,7 +45,7 @@ router.put("/editreaction/:id", async (req, res) => {
     }
 });
 
-//Route 4: Route delete reaction of the logged in vendor using PUT request "blogging/reaction/deletereaction/:id"
+//Route 4: Route delete reaction of the logged using PUT request "blogging/reaction/deletereaction/:id"
 
 router.put("/deletereaction/:id", async (req, res) => {
     try {
@@ -56,6 +56,20 @@ router.put("/deletereaction/:id", async (req, res) => {
         reaction = await Reaction.findByIdAndDelete(req.params.id);
         await Post.findByIdAndUpdate(postId, { $inc: { comments: -1 } }, { new: true });
         res.json("Your comment to this has been succesfully deleted");
+
+    } catch (error) {
+        res.status(400).json("Internal Server Error occured");
+    }
+});
+//Route 5: Get reaction of the  using get request "blogging/reaction/getreaction/:id"
+//here id is of post 
+router.get("/getreaction/:id", async (req, res) => {
+    try {
+        let reaction = await Reaction.find({post:req.params.id});
+        if (!reaction) {
+            return res.status(404).json("Not found");
+        }
+       res.json(reaction)
 
     } catch (error) {
         res.status(400).json("Internal Server Error occured");

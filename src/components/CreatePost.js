@@ -1,4 +1,5 @@
 import React from 'react'
+import Blog from './Blog'
 
 export default function CreatePost() {
     return (
@@ -25,12 +26,13 @@ export default function CreatePost() {
 
                         <div className="modal-footer">
                             <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" className="btn btn-primary">Create</button>
+                            <button type="button" className="btn btn-primary">Post</button>
                         </div>
                     </div>
                 </div>
             </div>
             <button type="button" className="btn btn-success btn-lg m-md-3 " data-bs-toggle="modal" data-bs-target="#create-post-model">Create Blog <i className="fa-solid fa-plus"></i></button>
+            <Blog/>
         </div>
     )
 }
