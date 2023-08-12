@@ -1,11 +1,14 @@
 import './App.css';
 import CreatePost from './components/CreatePost';
 import Navbar from './components/Navbar';
+import PostState from './context/postState';
 function App() {
   return (
     <>
-      <Navbar />
-      <CreatePost/>
+      <PostState>
+        <Navbar />
+        <CreatePost />
+      </PostState>
     </>
   );
 }
