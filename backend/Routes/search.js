@@ -34,7 +34,10 @@ router.get("/searchusers", fetchuser, async (req, res) => {
         const searchResults = await User.find({
                 name: { $regex: searchQuery, $options: 'i' } 
         }).select("name");
-  
+        if (searchResults.length<1)
+        {
+            return res.json(`No element against the search ${searchQuery}`);
+        }
         res.json(searchResults);
     } catch (error) {
         console.error(error);

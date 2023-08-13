@@ -7,11 +7,13 @@ import MyProfile from './components/MyProfile';
 import Users from './components/Users';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from './components/Home';
+import UserState from './context/usercontext/userState';
 function App() {
   return (
     <>
       <ReactionState>
         <PostState>
+          <UserState>
             <BrowserRouter>
               <Navbar />
               <Routes>
@@ -20,6 +22,7 @@ function App() {
                 <Route path="/users" element={<Users />} />
               </Routes>
             </BrowserRouter>
+          </UserState>
         </PostState>
       </ReactionState>
 
