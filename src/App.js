@@ -7,19 +7,22 @@ import MyProfile from './components/MyProfile';
 import Users from './components/Users';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from './components/Home';
+import SearchState from './context/search/searchState';
 function App() {
   return (
     <>
-      <ReactionState>   
+      <ReactionState>
         <PostState>
-          <BrowserRouter>
-            <Navbar />
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/myprofile" element={<MyProfile />} />
-              <Route path="/users" element={<Users />} />
-            </Routes>
-          </BrowserRouter>
+          <SearchState>
+            <BrowserRouter>
+              <Navbar />
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/myprofile" element={<MyProfile />} />
+                <Route path="/users" element={<Users />} />
+              </Routes>
+            </BrowserRouter>
+          </SearchState>
         </PostState>
       </ReactionState>
 
