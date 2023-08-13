@@ -65,11 +65,8 @@ router.put("/deletereaction/:id", async (req, res) => {
 //here id is of post 
 router.get("/getreaction/:id", async (req, res) => {
     try {
-        let reaction = await Reaction.find({post:req.params.id});
-        if (!reaction) {
-            return res.status(404).json("Not found");
-        }
-       res.json(reaction)
+        let reaction = await Reaction.find({ post: req.params.id });
+        res.json(reaction)
 
     } catch (error) {
         res.status(400).json("Internal Server Error occured");

@@ -1,4 +1,7 @@
 import React from 'react'
+import { Link } from "react-router-dom";
+
+
 
 export default function Navbar() {
     return (
@@ -10,13 +13,13 @@ export default function Navbar() {
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                         <li className="nav-item">
-                            <a className="nav-link" href="#"><i className="fa-solid fa-house"></i></a>
+                            <Link className="nav-link"  to="/"><i className="fa-solid fa-house"></i></Link>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="#"><i className="navbar-items fa-solid fa-users"></i></a>
+                            <Link className="nav-link"  to="/users"><i className="navbar-items fa-solid fa-users"></i></Link>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="#"><i className="navbar-items fa-solid fa-user"></i></a>
+                            <Link className="nav-link"  to="/myprofile"><i className="navbar-items fa-solid fa-user"></i></Link>
                         </li>
                     </ul>
                     <form className="d-flex">

@@ -3,7 +3,7 @@ import reactionContext from './reactionContext';
 
 const ReactionState = (props) => {
 
-    const[reactions,setReactions]=useState([]);
+    const [reactions, setReactions] = useState([]);
     const host = "http://localhost:5000";
 
     //here id is of post
@@ -22,13 +22,14 @@ const ReactionState = (props) => {
 
     //here too id is of post to which you are reacting too
 
-    const addReaction = async (id) => {
+    const addReaction = async (id, reaction) => {
         const response = await fetch(`${host}/blogging/reaction/addreaction/${id}`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
                 "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjRkNGIyNmY1MWE5NjU4NjVmY2Q4MzFiIn0sImlhdCI6MTY5MTg0MTA5OH0.-wTE1TlC6goGSg89xElnQLalm61gorog0f2vJVHbPzI",
-            }
+            },
+            body: JSON.stringify({ reaction })
         });
         const json = await response.json();
         return json;
@@ -59,10 +60,10 @@ const ReactionState = (props) => {
         return json;
     }
     return (
-        <reactionContext.Provider value={{reactions,getReactions,addReaction,editReaction,deleteReaction }}
+        <reactionContext.Provider value={{ reactions, getReactions, addReaction, editReaction, deleteReaction }}
         >
             {props.children}
         </reactionContext.Provider>
     )
-}  
+}
 export default ReactionState;

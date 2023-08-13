@@ -1,9 +1,11 @@
-import React, { useContext, useState } from 'react'
+import React, { useState } from 'react'
 import Comments from './Comments';
 
 export default function BlogItems(props) {
     const { post } = props;
     const [clickedPost, setClickedPostId] = useState("");
+   
+
 
     const onClick = (id) => {
         setClickedPostId(id);
@@ -16,11 +18,11 @@ export default function BlogItems(props) {
                         <div className="modal-header">
                             <h5 className="modal-title" id="exampleModalLabel">Comments</h5>
                             {console.log(clickedPost)}
-                             <Comments id={clickedPost} />
+                            <Comments id={clickedPost} />
                             <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
 
-                       
+
                     </div>
                 </div>
             </div>
