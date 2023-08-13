@@ -16,29 +16,22 @@ export default function CreatePost() {
     const onImageChange = (e) => {
         setblogCredentials({ ...blogCredentials, image: e.target.files[0] });
     };
+    
+    
     const submitImage = async (e) => {
-        try {
-            e.preventDefault();
-            console.log(blogCredentials)
-            const formData = new FormData();
-            formData.append("image", blogCredentials.image);
-            formData.append("text", blogCredentials.text);
-            formData.append("topic", blogCredentials.topic);
-            formData.append("type", blogCredentials.type);
-            await uploadPost(formData);
-            closeRef.current.click();
-
-
-        } catch (error) {
-            console.log(error)
-        }
-
-
+        e.preventDefault();
+        console.log(blogCredentials)
+        const formData = new FormData();
+        formData.append("image", blogCredentials.image);
+        formData.append("text", blogCredentials.text);
+        formData.append("topic", blogCredentials.topic);
+        formData.append("type", blogCredentials.type);
+        const message = await uploadPost(formData);
+        closeRef.current.click();
     }
     return (
         <div>
-            <Alert/>
-            
+         
             <div className="modal fade" id="create-post-model" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div className="modal-dialog">
                     <div className="modal-content">
