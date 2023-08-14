@@ -22,9 +22,9 @@ const upload = multer({ storage: storage })
 
 // Route 1: Add a post by post request using url "/blogging/posts/addpost".Login required
 router.post("/addpost", fetchuser, [
-    body("text", "Enter text of atleast 20 characters") ,//.isLength({ min: 20 }),
-    body("topic", "Enter text of atleast 8 characters") ,//.isLength({ min: 8 }),
-    body("type", "Enter text of atleast 2 characters") ,//.isLength({ min: 2}),
+    body("text", "Enter text of atleast 20 characters"),//.isLength({ min: 20 }),
+    body("topic", "Enter text of atleast 8 characters"),//.isLength({ min: 8 }),
+    body("type", "Enter text of atleast 2 characters"),//.isLength({ min: 2}),
 ], upload.single("image"),
     async (req, res) => {
         // if there are errors return the bad request
@@ -36,13 +36,13 @@ router.post("/addpost", fetchuser, [
         }
         try {
             const imageName = req.file.filename;
-            const { text,topic,type } = req.body;
+            const { text, topic, type } = req.body;
             await Post.create({
                 text: text, image: imageName,
                 user: req.user.id,
-                comments:0,
-                topic:topic,
-                type:type
+                comments: 0,
+                topic: topic,
+                type: type
             })
             res.json("Post uploaded succesfully");
 
@@ -66,7 +66,7 @@ router.get("/getmyposts", fetchuser, async (req, res) => {
 
 router.put("/editpost/:id", fetchuser, upload.single("image"), async (req, res) => {
     try {
-        const { text,topic,type } = req.body;
+        const { text, topic, type } = req.body;
         let newPost = await Post.findById(req.params.id);
         if (!newPost) {
             return res.json("The post can't be found");
@@ -93,7 +93,7 @@ router.put("/editpost/:id", fetchuser, upload.single("image"), async (req, res) 
 });
 
 //Route 3 : Delete own posts using put request using url "/blogging/posts/deletepost/:id".Login required
-router.put("/deletepost/:id",fetchuser, async (req, res) => {
+router.put("/deletepost/:id", fetchuser, async (req, res) => {
     try {
         let post = await Post.findById(req.params.id);
 
@@ -122,11 +122,22 @@ router.get("/getallposts", fetchuser, async (req, res) => {
 router.get("/getpostofrequireduser/:id", fetchuser, async (req, res) => {
     try {
 
-        let posts = await Post.find({user:req.params.id});
+        let posts = await Post.find({ user: req.params.id });
         res.send(posts);
     } catch (error) {
         res.json("Error getting posts")
         console.log(error);
+    }
+})
+//Route 5:Get the posts of all by post of required id  request by "/blogging/posts/getpostofrequiredid/:id"
+router.get("/getpostofrequiredid/:id", fetchuser, async (req, res) => {
+    try {
+        let posts = await Post.findById(req.params.id);
+        res.send(posts);
+    } catch (error) {
+        res.json("Error getting post")
+        console.log(error);
+       
     }
 })
 

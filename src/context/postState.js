@@ -6,6 +6,7 @@ const PostState = (props) => {
 
     const [posts, setPosts] = useState([]);
     const [myPosts, setMyPosts] = useState([]);
+    const [requiredPost, setrequiredPost] = useState({});
     const host = "http://localhost:5000";
 
     const uploadPost = async (formData) => {
@@ -25,6 +26,15 @@ const PostState = (props) => {
             }
         })
         setPosts(response.data);
+    }
+    const getRequiredPost = async (id) => {
+        let response = await axios.get(`${host}/blogging/posts/getpostofrequiredid/${id}`, {
+            headers: {
+                "Content-Type": "multipart/form-data",
+                "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjRkNGIyNmY1MWE5NjU4NjVmY2Q4MzFiIn0sImlhdCI6MTY5MTg0MTA5OH0.-wTE1TlC6goGSg89xElnQLalm61gorog0f2vJVHbPzI",
+            }
+        })
+        setrequiredPost(response.data);
     }
     const getMyPosts = async () => {
         let response = await axios.get(`${host}/blogging/posts/getmyposts`, {
@@ -63,7 +73,7 @@ const PostState = (props) => {
         }
     }
     return (
-        <postContext.Provider value={{ uploadPost, getPosts, posts, searchPosts, myPosts, getMyPosts,deletePost }}>
+        <postContext.Provider value={{ uploadPost, getPosts, posts, searchPosts, myPosts, getMyPosts,deletePost,getRequiredPost,requiredPost }}>
             {props.children}
         </postContext.Provider>
     )

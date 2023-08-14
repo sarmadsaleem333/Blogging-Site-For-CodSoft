@@ -38,7 +38,7 @@ export default function BlogItems(props) {
                                 <p className="card-text">{post.text.slice(0, 100)}...</p>
                                 <p className="card-text"><small className="text-muted">Last updated 3 mins ago</small></p>
                                 <i className="fa-solid fa-comment" onClick={() => onClick(post._id)} style={{ cursor: 'pointer' }} data-bs-toggle="modal" data-bs-target="#add-comment"></i>
-                                <Link className="btn-primary btn my-2" to="/blogdisplay">Read More</Link>
+                                <Link className="btn-primary btn my-2" to={`/blogdisplay/${post._id}`}>Read More</Link>
                             </div>
                         </div>
                     </div>

@@ -21,7 +21,7 @@ function App() {
                 <Route path="/" element={<Home />} />
                 <Route path="/myprofile" element={<MyProfile />} />
                 <Route path="/users" element={<Users />} />
-                <Route path="/blogdisplay" element={<DisplayFullBlog />} />
+                <Route path="/blogdisplay/:postId" element={<DisplayFullBlog />} />
               </Routes>
             </BrowserRouter>
           </UserState>
