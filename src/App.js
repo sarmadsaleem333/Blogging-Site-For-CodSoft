@@ -8,6 +8,7 @@ import Users from './components/Users';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from './components/Home';
 import UserState from './context/usercontext/userState';
+import DisplayFullBlog from './components/DisplayFullBlog';
 function App() {
   return (
     <>
@@ -20,6 +21,7 @@ function App() {
                 <Route path="/" element={<Home />} />
                 <Route path="/myprofile" element={<MyProfile />} />
                 <Route path="/users" element={<Users />} />
+                <Route path="/blogdisplay" element={<DisplayFullBlog />} />
               </Routes>
             </BrowserRouter>
           </UserState>

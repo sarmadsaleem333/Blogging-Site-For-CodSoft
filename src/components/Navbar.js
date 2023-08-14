@@ -13,11 +13,11 @@ export default function Navbar() {
     // }, [posts, searchPosts]);
 
     const onChange = (e) => {
-        setQuery( e.target.value );
+        setQuery(e.target.value);
     }
-    const handleSearch=async (e)=>{
-        e.preventDefault();        
-      const response=await searchPosts(query);
+    const handleSearch = async (e) => {
+        e.preventDefault();
+        const response = await searchPosts(query);
 
     }
 
@@ -38,9 +38,12 @@ export default function Navbar() {
                         <li className="nav-item">
                             <Link className="nav-link" to="/myprofile"><i className="navbar-items fa-solid fa-user"></i></Link>
                         </li>
+                        <li className="nav-item">
+                            <Link className="nav-link" to="https://www.linkedin.com/in/muhammad-sarmad-saleem-3bb060266/"><i class="fa-brands fa-linkedin-in"></i></Link>
+                        </li>
                     </ul>
                     <form className="d-flex">
-                        <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" value ={query} onChange={onChange}  />
+                        <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" value={query} onChange={onChange} />
                         <button className="btn btn-outline-success" type="submit" onClick={handleSearch}>Search</button>
                     </form>
                 </div>

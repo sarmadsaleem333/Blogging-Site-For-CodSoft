@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Comments from './Comments';
-
+import { Link } from 'react-router-dom';
 export default function BlogItems(props) {
     const { post } = props;
     const [clickedPost, setClickedPostId] = useState("");
@@ -38,7 +38,7 @@ export default function BlogItems(props) {
                                 <p className="card-text">{post.text.slice(0, 100)}...</p>
                                 <p className="card-text"><small className="text-muted">Last updated 3 mins ago</small></p>
                                 <i className="fa-solid fa-comment" onClick={() => onClick(post._id)} style={{ cursor: 'pointer' }} data-bs-toggle="modal" data-bs-target="#add-comment"></i>
-                                <div className="btn-primary btn my-2">Read More</div>
+                                <Link className="btn-primary btn my-2" to="/blogdisplay">Read More</Link>
                             </div>
                         </div>
                     </div>
