@@ -18,7 +18,7 @@ const PostState = (props) => {
         return result.data;
     };
     const getPosts = async () => {
-        let response = await axios.get(`${host}/blogging/posts/getmyposts`, {
+        let response = await axios.get(`${host}/blogging/posts/getallposts`, {
             headers: {
                 "Content-Type": "multipart/form-data",
                 "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjRkNGIyNmY1MWE5NjU4NjVmY2Q4MzFiIn0sImlhdCI6MTY5MTg0MTA5OH0.-wTE1TlC6goGSg89xElnQLalm61gorog0f2vJVHbPzI",

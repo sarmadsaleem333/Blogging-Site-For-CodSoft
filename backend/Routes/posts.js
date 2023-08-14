@@ -111,7 +111,7 @@ router.put("/deletepost/:id",fetchuser, async (req, res) => {
 //Route 4:Get the posts of all by post request by "/blogging/posts/getallposts"
 router.get("/getallposts", fetchuser, async (req, res) => {
     try {
-        let posts = await Post.find({});
+        let posts = await Post.find({}).sort({ date: -1 });
         res.send(posts);
     } catch (error) {
         res.json("Error getting posts")
