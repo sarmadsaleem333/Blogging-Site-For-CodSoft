@@ -93,7 +93,7 @@ router.put("/editpost/:id", fetchuser, upload.single("image"), async (req, res) 
 });
 
 //Route 3 : Delete own posts using put request using url "/blogging/posts/deletepost/:id".Login required
-router.put("/deletepost/:id", async (req, res) => {
+router.put("/deletepost/:id",fetchuser, async (req, res) => {
     try {
         let post = await Post.findById(req.params.id);
 

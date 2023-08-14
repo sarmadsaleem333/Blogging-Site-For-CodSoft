@@ -3,12 +3,15 @@ import userContext from '../context/usercontext/userContext';
 import postContext from '../context/postContext';
 
 export default function MyProfile() {
+  let global_id;
   const context = useContext(userContext);
   const { fetchuser, userDetails } = context;
   const context2 = useContext(postContext);
-  const { myPosts, getMyPosts } = context2;
+  const { myPosts, getMyPosts, deletePost } = context2;
+  const setId = (id) => {
+    global_id = id;
 
-
+  }
   useEffect(() => {
     // Fetch user details
     fetchuser();
@@ -20,8 +23,31 @@ export default function MyProfile() {
     console.log(myPosts)
   }, []);
 
+  const handleDelete = async (global_id) => {
+    console.log(global_id)
+    const response = await deletePost(global_id);
+    console.log(response);
+  }
+
   return (
     <>
+      <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Deleting your Blog</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              Are you sure you want to delete it ?
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary" onClick={handleDelete}>Delete</button>
+            </div>
+          </div>
+        </div>
+      </div>
       <div className='d-flex justify-content-center my-3'>
         <div>
           <i className="fa-solid fa-user" style={{ fontSize: '100px' }}></i>
@@ -50,6 +76,10 @@ export default function MyProfile() {
                           <p className="card-text"><small className="text-muted">Last updated 3 mins ago</small></p>
                           <i className="fa-solid fa-comment" style={{ cursor: 'pointer' }} data-bs-toggle="modal" data-bs-target="#add-comment"></i>
                           <div className="btn-primary btn my-2">Read More</div>
+                          <div className='d-flex'>
+                            <i class="fa-solid fa-pen-to-square" style={{ cursor: 'pointer' }} onClick={() => setId(post._id)} ></i>
+                            <i class="fa-solid fa-trash mx-4" style={{ cursor: 'pointer' }} onClick={() => setId(post._id)} data-bs-toggle="modal" data-bs-target="#deleteModal"></i>
+                          </div>
                         </div>
                       </div>
                     </div>
