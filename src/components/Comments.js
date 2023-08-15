@@ -18,20 +18,6 @@ export default function Comments(props) {
                 </div>
                 <p>{reaction.comment}</p>
             </div>
-            {/* here user will type the comment */}
-            {/* <div>
-                <div className='d-flex'>
-                    <i className="fa-solid fa-user mx-2 my-2"></i>
-                    <h6 className='my-1'>Name</h6>
-                </div>
-                <div className="input-group mb-3">
-                    <input type="text" className="form-control" placeholder="Add Comment Here " aria-label="post-Comment"  aria-describedby="basic-addon1" />
-                </div>
-            </div>
-            <div className="modal-footer">
-                <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" className="btn btn-primary" name='comment'   >Post Comment</button>
-            </div> */}
         </div>
     )
 }

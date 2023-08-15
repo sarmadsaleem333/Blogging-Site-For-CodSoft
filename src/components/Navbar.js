@@ -1,16 +1,15 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import postContext from '../context/postContext';
 
 
 
 export default function Navbar() {
+    let location = useLocation()
     const [query, setQuery] = useState();
     const context = useContext(postContext);
     const { posts, searchPosts } = context;
-    // useEffect(() => {
-    //     searchPosts();
-    // }, [posts, searchPosts]);
+    
 
     const onChange = (e) => {
         setQuery(e.target.value);
@@ -42,10 +41,12 @@ export default function Navbar() {
                             <Link className="nav-link" to="https://www.linkedin.com/in/muhammad-sarmad-saleem-3bb060266/"><i class="fa-brands fa-linkedin-in"></i></Link>
                         </li>
                     </ul>
-                    <form className="d-flex">
-                        <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" value={query} onChange={onChange} />
-                        <button className="btn btn-outline-success" type="submit" onClick={handleSearch}>Search</button>
-                    </form>
+                    { location.pathname==="/"?
+                        <form className="d-flex">
+                            <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" value={query} onChange={onChange} />
+                            <button className="btn btn-outline-success" type="submit" onClick={handleSearch}>Search</button>
+                        </form>:null
+                    }
                 </div>
             </div>
         </nav>

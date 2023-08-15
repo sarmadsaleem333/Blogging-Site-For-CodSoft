@@ -3,26 +3,34 @@ const router = express.Router();
 const Reaction = require("../Models/Reaction");
 const Post = require("../Models/Post");
 const fetchuser = require("../Middleware/fetchuser");
+const { validationResult, body } = require('express-validator');
+
 
 // Route 1: Route to comment any one's blog using post request  using url "/blogging/reaction/addreaction/:id"
 // here id is of the post to which you are reacting too
-router.post("/addreaction/:id", fetchuser, async (req, res) => {
-    try {
-        const { comment } = req.body;
-        const postId = req.params.id;
-        await Reaction.create({
-            comment: comment,
-            post: postId,
-            user: req.user.id
-        });
-        await Post.findByIdAndUpdate(postId, { $inc: { comments: +1 } }, { new: true });
-        res.send("You added comment to this post");
+router.post("/addreaction/:id", [
+    body("comment").notEmpty().withMessage("Comment must not be empty")], fetchuser, async (req, res) => {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            const response = errors.array();
+            return res.status(400).json(response[0].msg);
+        }
+        try {
+            const { comment } = req.body;
+            const postId = req.params.id;
+            await Reaction.create({
+                comment: comment,
+                post: postId,
+                user: req.user.id
+            });
+            await Post.findByIdAndUpdate(postId, { $inc: { comments: +1 } }, { new: true });
+            res.send("You added comment to this post");
 
-    } catch (error) {
-        console.log(error);
-        res.status(400).send("Internal server error occurred");
-    }
-})
+        } catch (error) {
+            console.log(error);
+            res.status(400).send("Internal server error occurred");
+        }
+    })
 // Route 2: Edit  comment  using put request  using url "/blogging/reaction/editreaction/:id"
 // here id is of reaction
 router.put("/editreaction/:id", async (req, res) => {

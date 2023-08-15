@@ -22,14 +22,14 @@ const ReactionState = (props) => {
 
     //here too id is of post to which you are reacting too
 
-    const addReaction = async (id, reaction) => {
+    const addReaction = async (id, comment) => {
         const response = await fetch(`${host}/blogging/reaction/addreaction/${id}`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
                 "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjRkNGIyNmY1MWE5NjU4NjVmY2Q4MzFiIn0sImlhdCI6MTY5MTg0MTA5OH0.-wTE1TlC6goGSg89xElnQLalm61gorog0f2vJVHbPzI",
             },
-            body: JSON.stringify({ reaction })
+            body: JSON.stringify({comment} )
         });
         const json = await response.json();
         return json;
