@@ -43,8 +43,8 @@ export default function Navbar() {
                     </ul>
                     { location.pathname==="/"?
                         <form className="d-flex">
-                            <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" value={query} onChange={onChange} />
-                            <button className="btn btn-outline-success" type="submit" onClick={handleSearch}>Search</button>
+                            <input className="form-control me-2" type="search" placeholder="Search Blogs" aria-label="Search" value={query} onChange={onChange} />
+                            <button className="btn btn-outline-success" type="submit" onClick={handleSearch}>Search </button>
                         </form>:null
                     }
                 </div>

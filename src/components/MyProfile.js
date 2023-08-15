@@ -8,10 +8,30 @@ export default function MyProfile() {
   const context = useContext(userContext);
   const { fetchuser, userDetails } = context;
   const context2 = useContext(postContext);
-  const { myPosts, getMyPosts, deletePost, uploadPost } = context2;
+  const { myPosts, getMyPosts, deletePost, uploadPost, editPost } = context2;
+  const [blogCredentials, setblogCredentials] = useState({ topic: "", text: "", type: "", image: "" });
+  const onChange = (e) => {
+    setblogCredentials({ ...blogCredentials, [e.target.name]: e.target.value });
+  }
+  const onImageChange = (e) => {
+    setblogCredentials({ ...blogCredentials, image: e.target.files[0] });
+  };
   const setId = (id) => {
     global_id = id;
+    console.log("1",global_id)
 
+  }
+  const handleEdit = async (e) => {
+    e.preventDefault();
+    console.log("2",global_id)
+    const formData = new FormData();
+    formData.append("image", blogCredentials.image);
+    formData.append("text", blogCredentials.text);
+    formData.append("topic", blogCredentials.topic);
+    formData.append("type", blogCredentials.type);
+    const message = await editPost(formData, global_id);
+    // closeRef.current.click();
+    console.log(message);
   }
   useEffect(() => {
     // Fetch user details
@@ -31,61 +51,11 @@ export default function MyProfile() {
 
   }
 
-
-  // const [blogCredentials, setblogCredentials] = useState({ topic: "", text: "", type: "", image: "" });
-  // const onChange = (e) => {
-  //   setblogCredentials({ ...blogCredentials, [e.target.name]: e.target.value });
-  // }
-  // const onImageChange = (e) => {
-  //   setblogCredentials({ ...blogCredentials, image: e.target.files[0] });
-  // };
-
-
-  // const submitImage = async (e) => {
-  //   e.preventDefault();
-  //   console.log(blogCredentials)
-  //   const formData = new FormData();
-  //   formData.append("image", blogCredentials.image);
-  //   formData.append("text", blogCredentials.text);
-  //   formData.append("topic", blogCredentials.topic);
-  //   formData.append("type", blogCredentials.type);
-  //   const message = await uploadPost(formData);
-  //   closeRef.current.click();
-  // }
-
   return (
     <>
-      <div className="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div className="modal-dialog">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h5 className="modal-title" id="deleteModal">Creating Blog</h5>
-              <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div className="input-group mb-3">
-              <input type="text" className="form-control" placeholder="Blog Title" aria-label="Blog Title" name='topic' aria-describedby="basic-addon1" />
-            </div>
-            <div className="input-group mb-3">
-              <textarea type="text" className="form-control" id='blog-text' placeholder="Blog Text" name='text' aria-label="Blog Text" aria-describedby="basic-addon1" />
-            </div>
-            <div className="input-group mb-3">
-              <input type="text" className="form-control" placeholder="Blog Type" name='type' aria-label="Blog Type" aria-describedby="basic-addon1" />
-            </div>
-            <div className="input-group mb-3">
-              <i className="fa-regular fa-images mx-2 my-2" ></i>
-              <input type="file" accept='image/*' />
 
-            </div>
 
-            <div className="modal-footer">
-              <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button type="button" className="btn btn-primary" >Post</button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModal" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
@@ -136,6 +106,34 @@ export default function MyProfile() {
                             <i class="fa-solid fa-trash mx-4" style={{ cursor: 'pointer' }} onClick={() => setId(post._id)} data-bs-toggle="modal" data-bs-target="#deleteModal"></i>
                           </div>
                         </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModal" aria-hidden="true">
+                  <div className="modal-dialog">
+                    <div className="modal-content">
+                      <div className="modal-header">
+                        <h5 className="modal-title" id="deleteModal">Editing Your Blog(Write only those parts you want to edit)</h5>
+                        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div className="input-group mb-3">
+                        <input type="text" className="form-control" placeholder="Write to Edit Blog Title" aria-label="Blog Title" name='topic' value={blogCredentials.topic} aria-describedby="basic-addon1"  onChange={onChange} />
+                      </div>
+                      <div className="input-group mb-3">
+                        <textarea type="text" className="form-control" id='blog-text' placeholder="Write to Edit Blog Text" name='text' value={blogCredentials.text} aria-label="Blog Text" aria-describedby="basic-addon1"  onChange={onChange}/>
+                      </div>
+                      <div className="input-group mb-3">
+                        <input type="text" className="form-control" placeholder="Write to Edit Blog Type" name='type' aria-label="Blog Type" value={blogCredentials.type} aria-describedby="basic-addon1" onChange={onChange} />
+                      </div>
+                      <div className="input-group mb-3"> Edit the Photo
+                        <i className="fa-regular fa-images mx-2 my-2" ></i>
+                        <input type="file" accept='image/*' onChange={onImageChange} />
+                      </div>
+
+                      <div className="modal-footer">
+                        <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" className="btn btn-primary" onClick={handleEdit}>Edit The Changes Made</button>
                       </div>
                     </div>
                   </div>
