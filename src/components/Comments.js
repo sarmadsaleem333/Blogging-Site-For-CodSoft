@@ -10,21 +10,23 @@ export default function Comments(props) {
 
     useEffect(() => {
         getReactions(id);
-    }, [id, getReactions]);
+    }, [id]);
 
     const onChange = (e) => {
         setComment({ [e.target.name]: e.target.value });
     }
-    const handleComment = async (id, comment) => {
-        const response = await addReaction(id, comment);
-        console.log(response);
-        closeRef.current.click();
+    const handleComment =  () => {
+        // const response = await addReaction(id, comment);
+        // console.log(response);
+        // closeRef.current.click();
+        console.log(id)
+        console.log(reactions)
     }
     return (
         <div>
 
             {
-                reactions == null ? reactions.map((reaction) => {
+                reactions == null ? null: reactions.map((reaction) => {
                     {/* here are the comments */ }
                     <div>
                         <div className='d-flex'>
@@ -33,7 +35,7 @@ export default function Comments(props) {
                         </div>
                         <p>{reaction.comment}</p>
                     </div>
-                }) : null
+                }) 
             }
 
 
@@ -50,8 +52,9 @@ export default function Comments(props) {
             </div>
             <div className="modal-footer">
                 <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" className="btn btn-primary" name='comment' value={comment} onClick={() => handleComment(id, comment)}>Post Comment</button>
+                <button type="button" className="btn btn-primary" name='comment' onClick={handleComment} value={comment} >Post Comment</button>
             </div>
         </div>
     )
 }
+// onClick={() => handleComment(id, comment)}
