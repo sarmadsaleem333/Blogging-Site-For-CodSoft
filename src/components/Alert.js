@@ -1,18 +1,15 @@
 import React from 'react'
 
-export default function Alert(props) {
-    let  { message} = props;
+export const Alert = (props) => {
     return (
-        <div className="alert alert-success alert- d-flex align-items-center" role="alert">
-            <svg className="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:">
-                <use xlinkHref="#check-circle-fill" />
-            </svg>
-            <div>
-                {props.message}
-            </div>
+        // <div>
+        //     <div className="alert alert-primary" role="alert">
+        //         {props.message}
+        //     </div>
+        // </div>
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <strong> {props.message} </strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
-
-
-
     )
 }

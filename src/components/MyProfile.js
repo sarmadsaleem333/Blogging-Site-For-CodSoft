@@ -1,8 +1,9 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import userContext from '../context/usercontext/userContext';
 import postContext from '../context/postContext';
-
+import { Alert } from './Alert';
 export default function MyProfile() {
+  const [alertMessage, setAlertMessage] = useState(null);
   let global_id;
   const closeRef = useRef(null);
   const context = useContext(userContext);
@@ -18,20 +19,21 @@ export default function MyProfile() {
   };
   const setId = (id) => {
     global_id = id;
-    console.log("1",global_id)
+    console.log("1", global_id)
 
   }
   const handleEdit = async (e) => {
     e.preventDefault();
-    console.log("2",global_id)
+    console.log("2", global_id)
     const formData = new FormData();
     formData.append("image", blogCredentials.image);
     formData.append("text", blogCredentials.text);
     formData.append("topic", blogCredentials.topic);
     formData.append("type", blogCredentials.type);
     const message = await editPost(formData, global_id);
-    // closeRef.current.click();
-    console.log(message);
+    closeRef.current.click();
+    setAlertMessage(message); 
+
   }
   useEffect(() => {
     // Fetch user details
@@ -47,26 +49,27 @@ export default function MyProfile() {
   const handleDelete = async () => {
     console.log(global_id)
     const response = await deletePost(global_id);
-    console.log(response)
+    setAlertMessage(response); 
 
   }
 
   return (
     <>
 
+      {alertMessage && <Alert message={alertMessage} />}
 
       <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModal" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title" id="exampleModalLabel">Deleting your Blog</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" ref={closeRef}  aria-label="Close"></button>
             </div>
             <div class="modal-body">
               Are you sure you want to delete it ?
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-secondary" ref={closeRef}  data-bs-dismiss="modal">Close</button>
               <button type="button" class="btn btn-primary" onClick={handleDelete}>Delete</button>
             </div>
           </div>
@@ -118,10 +121,10 @@ export default function MyProfile() {
                         <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                       </div>
                       <div className="input-group mb-3">
-                        <input type="text" className="form-control" placeholder="Write to Edit Blog Title" aria-label="Blog Title" name='topic' value={blogCredentials.topic} aria-describedby="basic-addon1"  onChange={onChange} />
+                        <input type="text" className="form-control" placeholder="Write to Edit Blog Title" aria-label="Blog Title" name='topic' value={blogCredentials.topic} aria-describedby="basic-addon1" onChange={onChange} />
                       </div>
                       <div className="input-group mb-3">
-                        <textarea type="text" className="form-control" id='blog-text' placeholder="Write to Edit Blog Text" name='text' value={blogCredentials.text} aria-label="Blog Text" aria-describedby="basic-addon1"  onChange={onChange}/>
+                        <textarea type="text" className="form-control" id='blog-text' placeholder="Write to Edit Blog Text" name='text' value={blogCredentials.text} aria-label="Blog Text" aria-describedby="basic-addon1" onChange={onChange} />
                       </div>
                       <div className="input-group mb-3">
                         <input type="text" className="form-control" placeholder="Write to Edit Blog Type" name='type' aria-label="Blog Type" value={blogCredentials.type} aria-describedby="basic-addon1" onChange={onChange} />
@@ -132,7 +135,7 @@ export default function MyProfile() {
                       </div>
 
                       <div className="modal-footer">
-                        <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" className="btn btn-secondary" ref={closeRef}   data-bs-dismiss="modal">Close</button>
                         <button type="button" className="btn btn-primary" onClick={handleEdit}>Edit The Changes Made</button>
                       </div>
                     </div>

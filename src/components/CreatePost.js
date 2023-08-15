@@ -1,10 +1,12 @@
 import React, { useRef, useContext, useState } from 'react'
 import Blog from './Blog'
+import { Alert } from './Alert';
 import postContext from '../context/postContext';
-import Alert from './Alert';
+
 
 
 export default function CreatePost() {
+    const [alertMessage, setAlertMessage] = useState(null);
     const closeRef = useRef(null);
     const context = useContext(postContext);
     const { uploadPost } = context;
@@ -16,8 +18,8 @@ export default function CreatePost() {
     const onImageChange = (e) => {
         setblogCredentials({ ...blogCredentials, image: e.target.files[0] });
     };
-    
-    
+
+
     const submitImage = async (e) => {
         e.preventDefault();
         console.log(blogCredentials)
@@ -27,11 +29,12 @@ export default function CreatePost() {
         formData.append("topic", blogCredentials.topic);
         formData.append("type", blogCredentials.type);
         const message = await uploadPost(formData);
+        setAlertMessage(message); 
         closeRef.current.click();
     }
     return (
         <div>
-         
+            {alertMessage && <Alert message={alertMessage} />}
             <div className="modal fade" id="create-post-model" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div className="modal-dialog">
                     <div className="modal-content">
@@ -51,7 +54,6 @@ export default function CreatePost() {
                         <div className="input-group mb-3">
                             <i className="fa-regular fa-images mx-2 my-2" ></i>
                             <input type="file" accept='image/*' onChange={onImageChange} />
-
                         </div>
 
                         <div className="modal-footer">
