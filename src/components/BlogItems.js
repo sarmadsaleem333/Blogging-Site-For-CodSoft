@@ -1,31 +1,62 @@
-import React, { useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Comments from './Comments';
 import { Link } from 'react-router-dom';
+import reactionContext from '../context/reaction/reactionContext';
+
 export default function BlogItems(props) {
     const { post } = props;
     const [clickedPost, setClickedPostId] = useState("");
-   
+    const context = useContext(reactionContext);
+    const { getReactions, reactions, addReaction } = context;
 
-
-    const onClick = (id) => {
+    const onClick = async (id) => {
         setClickedPostId(id);
+        await getReactions(id); // Fetch reactions for the clicked post
     }
+
+    useEffect(() => {
+        getReactions(clickedPost);
+    }, [clickedPost]);
+
     return (
         <>
-            <div className="modal fade" id="add-comment" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            {/* <div className="modal fade" id="add-comment" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div className="modal-dialog">
                     <div className="modal-content">
                         <div className="modal-header">
                             <h5 className="modal-title" id="exampleModalLabel">Comments</h5>
-                            {console.log(clickedPost)}
-                            <Comments id={clickedPost} />
+                            <div className="d-flex">
+                                {reactions == null ? null : reactions.map((reaction) => {
+                                    return <Comments reaction={reaction} />
+                                })}
+                            </div>
+
                             <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
+                    </div>
+                </div>
+            </div> */}
+            <div className="modal fade" id="add-comment" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div className="modal-dialog">
+                    <div className="modal-content">
+                        <div className="modal-header">
+                            <h5 className="modal-title" id="exampleModalLabel">Comments</h5>
+                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div className="modal-body">
 
+                            {reactions.length ==0 
+                                ? <>No comments to show</>
+                                : reactions.map((reaction) => (
+                                    <Comments reaction={reaction} />
+                                ))}
 
+                        </div>
+                        {/* You can add your modal footer here */}
                     </div>
                 </div>
             </div>
+
             <div className="col-md-3">
                 <div className="card mb-3" style={{ maxWidth: '540px' }}>
                     <div className="row g-0">

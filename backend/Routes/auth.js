@@ -128,10 +128,24 @@ router.get("/fetchuser", fetchuser, async (req, res) => {
         res.status(500).send("Internal Server Error occured");
     }
 });
+
+//route to get all users 
 router.get("/fetchallusers", fetchuser, async (req, res) => {
     try {
         const user = await User.find({}).sort({date:-1});
         res.send(user);
+    }
+    catch (error) {
+        console.log(error.message);
+        res.status(500).send("Internal Server Error occured");
+    }
+});
+
+//route to getusername
+router.get("/getusername/:id", fetchuser, async (req, res) => {
+    try {
+        const user = await User.findById(req.params.id)
+        res.send(user.name);
     }
     catch (error) {
         console.log(error.message);

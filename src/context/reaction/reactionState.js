@@ -4,6 +4,7 @@ import reactionContext from './reactionContext';
 const ReactionState = (props) => {
 
     const [reactions, setReactions] = useState([]);
+
     const host = "http://localhost:5000";
 
     //here id is of post
@@ -17,7 +18,6 @@ const ReactionState = (props) => {
         });
         const json = await response.json();
         setReactions(json);
-        return json;
     }
 
     //here too id is of post to which you are reacting too
