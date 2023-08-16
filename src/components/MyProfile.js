@@ -33,7 +33,6 @@ export default function MyProfile() {
     const message = await editPost(formData, global_id);
     closeRef.current.click();
     setAlertMessage(message); 
-
   }
   useEffect(() => {
     // Fetch user details
@@ -49,9 +48,14 @@ export default function MyProfile() {
   const handleDelete = async () => {
     console.log(global_id)
     const response = await deletePost(global_id);
-    setAlertMessage(response); 
+    const message = await response.text(); 
+    setAlertMessage(message); 
 
   }
+  // if (alertMessage) {
+  //   const timeoutId = setTimeout(() => {
+  //     setAlertMessage(null);
+  //   }, 5000);}
 
   return (
     <>
@@ -144,7 +148,7 @@ export default function MyProfile() {
               </>
             )
           })
-            : <h4 className='d-flex justify-content-center my-3 '>You have not posted any Blog</h4>
+            : <h4 className='d-flex justify-content-center my-3'>You have not posted any Blog</h4>
         }
       </div>
     </>
