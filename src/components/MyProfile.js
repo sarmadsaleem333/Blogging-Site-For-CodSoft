@@ -9,7 +9,7 @@ export default function MyProfile() {
   const context = useContext(userContext);
   const { fetchuser, userDetails } = context;
   const context2 = useContext(postContext);
-  const { myPosts, getMyPosts, deletePost, uploadPost, editPost } = context2;
+  const { myPosts, getMyPosts, deletePost,  editPost } = context2;
   const [blogCredentials, setblogCredentials] = useState({ topic: "", text: "", type: "", image: "" });
   const onChange = (e) => {
     setblogCredentials({ ...blogCredentials, [e.target.name]: e.target.value });
@@ -117,13 +117,14 @@ export default function MyProfile() {
                     </div>
                   </div>
                 </div>
-                <div className="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModal" aria-hidden="true">
+                <div className="modal fade" id="editModal" tabindex="-1"  aria-labelledby="editModal" aria-hidden="true">
                   <div className="modal-dialog">
                     <div className="modal-content">
                       <div className="modal-header">
                         <h5 className="modal-title" id="deleteModal">Editing Your Blog(Write only those parts you want to edit)</h5>
                         <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                       </div>
+                      
                       <div className="input-group mb-3">
                         <input type="text" className="form-control" placeholder="Write to Edit Blog Title" aria-label="Blog Title" name='topic' value={blogCredentials.topic} aria-describedby="basic-addon1" onChange={onChange} />
                       </div>
