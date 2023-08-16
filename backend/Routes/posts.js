@@ -10,7 +10,7 @@ const multer = require("multer");
 // and storing image name in data base
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, "src/images/");
+        cb(null, "public/images/");
     },
     filename: function (req, file, cb) {
         const uniqueSuffix = Date.now();

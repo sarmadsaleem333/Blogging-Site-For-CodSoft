@@ -7,7 +7,7 @@ const PostState = (props) => {
     const [posts, setPosts] = useState([]);
     const [myPosts, setMyPosts] = useState([]);
     const [requiredPost, setrequiredPost] = useState({});
-    const host = "http://localhost:5000";
+    const host = "http://localhost:3333";
 
     const uploadPost = async (formData) => {
         const result = await axios.post(`${host}/blogging/posts/addpost`, formData, {

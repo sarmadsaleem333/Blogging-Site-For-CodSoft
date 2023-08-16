@@ -5,7 +5,7 @@ const ReactionState = (props) => {
 
     const [reactions, setReactions] = useState([]);
 
-    const host = "http://localhost:5000";
+    const host = "http://localhost:3333";
 
     //here id is of post
     const getReactions = async (id) => {

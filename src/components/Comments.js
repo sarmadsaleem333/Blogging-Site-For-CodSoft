@@ -51,7 +51,7 @@ export default function Comments(props) {
                 ))}
 
             <div>
-                {console.log(id)}
+                PostId: {id}
                 <div className='d-flex'>
                     <i className="fa-solid fa-user mx-2 my-2"></i>
                     <h6 className='my-1'>Name</h6>

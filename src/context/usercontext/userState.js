@@ -4,7 +4,7 @@ import userContext from './userContext'
 const UserState = (props) => {
     const [users, setUsers] = useState([]);
     const [name, setName] = useState("");
-    const host = "http://localhost:5000";
+    const host = "http://localhost:3333";
     const [userDetails, setUserDetails] = useState({});
 
     const fetchuser = async () => {
