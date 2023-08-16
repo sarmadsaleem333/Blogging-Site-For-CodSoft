@@ -5,7 +5,7 @@ export default function Comments(props) {
     const context = useContext(reactionContext);
     const { getReactions, reactions, addReaction } = context;
     const [comment, setComment] = useState("");
-    const [global_id,setGlobalId]=useState("");
+    const [global_id, setGlobalId] = useState("");
     // const context = useContext(userContext);
     // const { getName, name } = context;
     // useEffect(() => {
@@ -17,21 +17,18 @@ export default function Comments(props) {
         setComment(e.target.value);
     }
     useEffect(() => {
-
-        // // console.log("hello")
-        // setGlobalId(id);
         getReactions(id);
     }, [id])
-   
-    
 
-    const handleComment=()=>{
-     console.log(id)
-        // const response=await addReaction(id,comment);
-        // console.log(response);
+
+
+    const handleComment = async() => {
+        console.log(id)
+        const response = await addReaction(id, comment);
+        console.log(response.data);
 
     }
-    
+
     return (
 
         <>
@@ -51,7 +48,7 @@ export default function Comments(props) {
                 ))}
 
             <div>
-                PostId: {id}
+        
                 <div className='d-flex'>
                     <i className="fa-solid fa-user mx-2 my-2"></i>
                     <h6 className='my-1'>Name</h6>
@@ -62,9 +59,8 @@ export default function Comments(props) {
             </div>
             <div className="modal-footer">
                 <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" className="btn btn-primary" name='comment' onClick={()=>handleComment()} >Post Comment</button>
+                <button type="button" className="btn btn-primary" name='comment' onClick={() => handleComment()} >Post Comment</button>
             </div>
         </>
     )
 }
-// onClick={() => handleComment(id, comment)}

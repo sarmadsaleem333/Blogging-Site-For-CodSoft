@@ -99,7 +99,7 @@ export default function MyProfile() {
                   <div className="card mb-3" style={{ maxWidth: '540px' }}>
                     <div className="row g-0">
                       <div className="col-md-4">
-                        <img src={require(`../images/${(post.image)}`)} className="img-fluid rounded-start" alt="..." />
+                        <img  src={`http://localhost:3333/images/${(post.image)}`} className="img-fluid rounded-start" alt="..." />
                       </div>
                       <div className="col-md-8">
                         <div className="card-body d-flex flex-column h-100">

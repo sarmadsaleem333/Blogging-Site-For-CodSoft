@@ -22,9 +22,9 @@ const upload = multer({ storage: storage })
 
 // Route 1: Add a post by post request using url "/blogging/posts/addpost".Login required
 router.post("/addpost", fetchuser, [
-    body("text", "Enter text of atleast 20 characters"),//.isLength({ min: 20 }),
-    body("topic", "Enter text of atleast 8 characters"),//.isLength({ min: 8 }),
-    body("type", "Enter text of atleast 2 characters"),//.isLength({ min: 2}),
+    body("text", "Enter text of atleast 20 characters"), //.isLength({ min: 20 }),
+    body("topic", "Enter text of atleast 8 characters"), //.isLength({ min: 8 }),
+    body("type", "Enter text of atleast 2 characters"), //.isLength({ min: 2}),
 ], upload.single("image"),
     async (req, res) => {
         // if there are errors return the bad request

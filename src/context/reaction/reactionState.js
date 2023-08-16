@@ -32,6 +32,7 @@ const ReactionState = (props) => {
             body: JSON.stringify({comment} )
         });
         const json = await response.json();
+        
         return json;
     }
 
