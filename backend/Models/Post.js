@@ -15,6 +15,10 @@ const PostSchema = new Schema({
         type: mongoose.Schema.Types.ObjectId,
         required: true
     },
+    user_name: {
+        type: String,
+        required: true
+    },
     topic: {
         type: String
     },

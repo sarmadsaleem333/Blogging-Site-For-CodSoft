@@ -14,9 +14,9 @@ const ReactionSchema = new Schema({
         required: true
     },
     user: {
-        type: mongoose.Schema.Types.ObjectId,
+        type: String,
         required: true
-    }
+    },
 });
 
 const Reaction = mongoose.model("Blogging_Reactions", ReactionSchema);

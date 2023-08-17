@@ -9,7 +9,7 @@ export default function Navbar() {
     const [query, setQuery] = useState();
     const context = useContext(postContext);
     const { posts, searchPosts } = context;
-    
+
 
     const onChange = (e) => {
         setQuery(e.target.value);
@@ -41,12 +41,15 @@ export default function Navbar() {
                             <Link className="nav-link" to="https://www.linkedin.com/in/muhammad-sarmad-saleem-3bb060266/"><i class="fa-brands fa-linkedin-in"></i></Link>
                         </li>
                     </ul>
-                    { location.pathname==="/"?
+                    {location.pathname === "/" ?
                         <form className="d-flex">
                             <input className="form-control me-2" type="search" placeholder="Search Blogs" aria-label="Search" value={query} onChange={onChange} />
                             <button className="btn btn-outline-success" type="submit" onClick={handleSearch}>Search </button>
-                        </form>:null
+                        </form> : null
                     }
+                    <li className=" mx-2">
+                        <Link type="button" className={`btn btn-light ${location.pathname === "/signup" ? "active" : ""}`} to="/signup">Sign Up</Link>
+                    </li>
                 </div>
             </div>
         </nav>

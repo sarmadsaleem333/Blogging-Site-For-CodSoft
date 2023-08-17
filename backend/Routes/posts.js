@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const { validationResult, body } = require('express-validator');
 const Post = require("../Models/Post");
+const User = require("../Models/User");
 const fetchuser = require("../Middleware/fetchuser");
 const multer = require("multer");
 
@@ -10,7 +11,7 @@ const multer = require("multer");
 // and storing image name in data base
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, "public/images/");
+        cb(null, "backend/public/images/");
     },
     filename: function (req, file, cb) {
         const uniqueSuffix = Date.now();
@@ -34,12 +35,14 @@ router.post("/addpost", fetchuser, [
             console.log(response[0].msg)
             return res.status(400).json(response[0].msg);
         }
+        const post_user=await User.findById(req.user.id)
         try {
             const imageName = req.file.filename;
             const { text, topic, type } = req.body;
             await Post.create({
                 text: text, image: imageName,
-                user: req.user.id,
+                user_name: post_user.name,
+                user:req.user.id,
                 comments: 0,
                 topic: topic,
                 type: type

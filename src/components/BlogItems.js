@@ -62,7 +62,7 @@ export default function BlogItems(props) {
                             <div className="card-body d-flex flex-column h-100">
                                 <h5 className="card-title">{post.topic}</h5>
                                 <p className="card-text">{post.text.slice(0, 100)}...</p>
-                                <p className="card-text"><small className="text-muted">Last updated 3 mins ago  </small></p>
+                                <p className="card-text"><small className="text-muted">By {post.user_name} on {post.date.slice(0,10)} </small></p>
                                 <i className="fa-solid fa-comment" onClick={() => onClick(post._id)} style={{ cursor: 'pointer' }} data-bs-toggle="modal" data-bs-target={`#add-comment__${post._id}`}></i>
                                 <Link className="btn-primary btn my-2" to={`/blogdisplay/${post._id}`}>Read More </Link>
                             </div>

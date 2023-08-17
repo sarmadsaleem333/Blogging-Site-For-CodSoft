@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const Reaction = require("../Models/Reaction");
 const Post = require("../Models/Post");
+const User = require("../Models/User");
 const fetchuser = require("../Middleware/fetchuser");
 const { validationResult, body } = require('express-validator');
 
@@ -15,13 +16,14 @@ router.post("/addreaction/:id", [
             const response = errors.array();
             return res.status(400).json(response[0].msg);
         }
+        const post_user=await User.findById(req.user.id)
         try {
             const { comment } = req.body;
             const postId = req.params.id;
             await Reaction.create({
                 comment: comment,
                 post: postId,
-                user: req.user.id
+                user: post_user.name,
             });
             await Post.findByIdAndUpdate(postId, { $inc: { comments: +1 } }, { new: true });
             res.send("You added comment to this post");
