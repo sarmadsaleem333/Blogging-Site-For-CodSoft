@@ -20,7 +20,7 @@ export default function BlogItems(props) {
         console.log("clicked post:", clickedPost);
     }, [clickedPost]);
     const onClick = async (id) => {
-        global_id=id
+        global_id = id
         console.log(global_id)
         setClickedPostId(id);
         await getReactions(id);
@@ -36,7 +36,7 @@ export default function BlogItems(props) {
     }
     return (
         <>
-        
+
             <div className="modal fade" id={`add-comment__${post._id}`} tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div className="modal-dialog">
                     <div className="modal-content">
@@ -45,9 +45,9 @@ export default function BlogItems(props) {
                             <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div className="modal-body">
-                           {<Comments id={post._id} />}
+                            {<Comments id={post._id} />}
                         </div>
-                       
+
                     </div>
                 </div>
             </div>
@@ -62,8 +62,11 @@ export default function BlogItems(props) {
                             <div className="card-body d-flex flex-column h-100">
                                 <h5 className="card-title">{post.topic}</h5>
                                 <p className="card-text">{post.text.slice(0, 100)}...</p>
-                                <p className="card-text"><small className="text-muted">By {post.user_name} on {post.date.slice(0,10)} </small></p>
-                                <i className="fa-solid fa-comment" onClick={() => onClick(post._id)} style={{ cursor: 'pointer' }} data-bs-toggle="modal" data-bs-target={`#add-comment__${post._id}`}></i>
+                                <p className="card-text"><small className="text-muted">By {post.user_name} on {post.date.slice(0, 10)} </small></p>
+                                <div className='d-flex'>
+                                    <i className="fa-solid fa-comment my-1 mx-2" onClick={() => onClick(post._id)} style={{ cursor: 'pointer' }} data-bs-toggle="modal" data-bs-target={`#add-comment__${post._id}`}></i>
+                                    <h6>{post.comments}</h6>
+                                </div>
                                 <Link className="btn-primary btn my-2" to={`/blogdisplay/${post._id}`}>Read More </Link>
                             </div>
                         </div>

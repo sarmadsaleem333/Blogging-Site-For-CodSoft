@@ -46,7 +46,10 @@ export default function MyProfile() {
     const response = await deletePost(id);
     const message = await response.text();
     console.log(message)
+    closeRef.current.click();
+
     setAlertMessage(message);
+
 
   }
 
@@ -117,7 +120,7 @@ export default function MyProfile() {
                       </div>
 
                       <div className="modal-footer">
-                        <button type="button" className="btn btn-secondary" ref={closeRef} data-bs-dismiss="modal">Close</button>
+                      <button type="button" class="btn btn-secondary" ref={closeRef} data-bs-dismiss="modal">Close</button>
                         <button type="button" className="btn btn-primary" onClick={()=>handleEdit(post._id)}>Edit The Changes Made</button>
                       </div>
                     </div>
@@ -128,7 +131,7 @@ export default function MyProfile() {
                     <div class="modal-content">
                       <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">Deleting your Blog</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" ref={closeRef} aria-label="Close"></button>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"  aria-label="Close"></button>
                       </div>
                       <div class="modal-body">
                         Are you sure you want to delete it ?
