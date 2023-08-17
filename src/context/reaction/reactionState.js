@@ -31,9 +31,9 @@ const ReactionState = (props) => {
             },
             body: JSON.stringify({comment} )
         });
-        const json = await response.json();
-        
-        return json;
+        // const json = await response.json();
+        // return json;
+        return response;
     }
 
     //here id is of reaction 

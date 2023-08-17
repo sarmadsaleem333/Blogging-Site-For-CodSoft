@@ -26,7 +26,7 @@ router.post("/addreaction/:id", [
                 user: post_user.name,
             });
             await Post.findByIdAndUpdate(postId, { $inc: { comments: +1 } }, { new: true });
-            res.send("You added comment to this post");
+            res.json("You added comment to this post");
 
         } catch (error) {
             console.log(error);
