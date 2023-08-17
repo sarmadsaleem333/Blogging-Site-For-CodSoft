@@ -12,7 +12,7 @@ export default function MyProfile() {
   const { myPosts, getMyPosts, deletePost, editPost } = context2;
   const alertcontext = useContext(alertContext);
   const { showAlert } = alertcontext;
-
+  
   const [blogCredentials, setblogCredentials] = useState({ topic: "", text: "", type: "", image: "" });
   const onChange = (e) => {
     setblogCredentials({ ...blogCredentials, [e.target.name]: e.target.value });
@@ -30,7 +30,7 @@ export default function MyProfile() {
     formData.append("type", blogCredentials.type);
     const message = await editPost(formData, id);
     closeEditModalRef.current.click();
-    showAlert(message,"success")
+    showAlert(message, "success")
   }
   useEffect(() => {
     // Fetch user details
@@ -47,7 +47,7 @@ export default function MyProfile() {
     console.log(id)
     const response = await deletePost(id);
     const message = await response.text();
-    showAlert(message,"danger")
+    showAlert(message, "danger")
     closeDeleteModalRef.current.click();
 
 
@@ -120,7 +120,7 @@ export default function MyProfile() {
                       </div>
 
                       <div className="modal-footer">
-                        <button type="button" class="btn btn-secondary" ref={ closeEditModalRef } data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-secondary" ref={closeEditModalRef} data-bs-dismiss="modal">Close</button>
                         <button type="button" className="btn btn-primary" onClick={() => handleEdit(post._id)}>Edit The Changes Made</button>
                       </div>
                     </div>

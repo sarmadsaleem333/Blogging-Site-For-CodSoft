@@ -2,6 +2,8 @@ import React, { useContext, useState } from 'react'
 import userContext from '../context/usercontext/userContext';
 import alertContext from '../context/alert/alertContext';
 import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import SignUp from './SignUp';
 
 export default function Login() {
     const navigate = useNavigate();
@@ -38,6 +40,7 @@ export default function Login() {
             <div className='align-self-center '>
                 <button type="submit" class="btn btn-primary " onClick={handleSubmit}> Login </button>
             </div>
+            <Link className='align-self-center my-3 ' to="/signup">Dont Have an Account Sign Up</Link>
         </div>
     )
 }
