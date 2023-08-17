@@ -1,6 +1,7 @@
 import React, { useRef, useContext, useState } from 'react'
 import Blog from './Blog'
 import postContext from '../context/postContext';
+import alertContext from '../context/alert/alertContext';
 
 
 
@@ -8,6 +9,9 @@ export default function CreatePost() {
     const closeRef = useRef(null);
     const context = useContext(postContext);
     const { uploadPost } = context;
+    const alertcontext = useContext(alertContext);
+    const { showAlert } = alertcontext;
+
 
     const [blogCredentials, setblogCredentials] = useState({ topic: "", text: "", type: "", image: "" });
     const onChange = (e) => {
@@ -27,7 +31,9 @@ export default function CreatePost() {
         formData.append("topic", blogCredentials.topic);
         formData.append("type", blogCredentials.type);
         const message = await uploadPost(formData);
-        setblogCredentials({ topic: "", text: "", type: "", image: "" }); 
+        setblogCredentials({ topic: "", text: "", type: "", image: "" });
+        showAlert(message, "success");
+
         closeRef.current.click();
     }
     return (
