@@ -1,9 +1,7 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import userContext from '../context/usercontext/userContext';
 import postContext from '../context/postContext';
-import { Alert } from './Alert';
 export default function MyProfile() {
-  const [alertMessage, setAlertMessage] = useState(null);
   
   const closeRef = useRef(null);
   const context = useContext(userContext);
@@ -28,7 +26,6 @@ export default function MyProfile() {
     const message = await editPost(formData, id);
     closeRef.current.click();
     console.log(message)
-    setAlertMessage(message);
   }
   useEffect(() => {
     // Fetch user details
@@ -48,7 +45,6 @@ export default function MyProfile() {
     console.log(message)
     closeRef.current.click();
 
-    setAlertMessage(message);
 
 
   }
@@ -56,7 +52,6 @@ export default function MyProfile() {
   return (
     <>
 
-      {alertMessage && <Alert message={alertMessage} />}
 
 
       <div className='d-flex justify-content-center my-3'>

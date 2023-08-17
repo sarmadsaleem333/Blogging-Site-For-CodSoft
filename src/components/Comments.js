@@ -26,6 +26,7 @@ export default function Comments(props) {
                 console.log("Error adding a comment")
             }
             closeRef.current.click();
+            setComment("")
     
         }
 

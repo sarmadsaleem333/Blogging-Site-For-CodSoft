@@ -11,25 +11,35 @@ import UserState from './context/usercontext/userState';
 import DisplayFullBlog from './components/DisplayFullBlog';
 import SignUp from './components/SignUp';
 import Login from './components/Login';
-
-global.message="";
-global.Alert=false;
+import Alert from './components/Alert';
+import { useState } from 'react';
 function App() {
+  const [alert, setAlert] = useState(null);
+  const showAlert = (message, type) => {
+    setAlert({
+      msg: message,
+      type: type
+    })
+    setTimeout(() => {
+      setAlert(null);
+    }, 2500);
+  }
+
   return (
-  
     <>
       <ReactionState>
         <PostState>
           <UserState>
             <BrowserRouter>
               <Navbar />
+              <Alert alert={alert} />
               <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/myprofile" element={<MyProfile />} />
-                <Route path="/users" element={<Users />} />
-                <Route path="/blogdisplay/:postId" element={<DisplayFullBlog />} />
-                <Route path="/signup" element={<SignUp />} />
-                <Route path="/login" element={<Login />} />
+                <Route path="/" element={<Home  showAlert={showAlert}/>} />
+                <Route path="/myprofile" element={<MyProfile  showAlert={showAlert}/>} />
+                <Route path="/users" element={<Users  showAlert={showAlert}/>} />
+                <Route path="/blogdisplay/:postId" element={<DisplayFullBlog showAlert={showAlert} />} />
+                <Route path="/signup" element={<SignUp showAlert={showAlert} />} />
+                <Route path="/login" element={<Login  showAlert={showAlert}/>} />
               </Routes>
             </BrowserRouter>
           </UserState>

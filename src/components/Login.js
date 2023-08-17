@@ -1,19 +1,19 @@
 import React, { useContext, useState } from 'react'
 import userContext from '../context/usercontext/userContext';
 
-export default function Login() {
+export default function Login(props) {
     const context = useContext(userContext);
     const { loginUser } = context;
     const [credentials, setCredentials] = useState({ email: "", password: "" });
     const onChange = (e) => {
         setCredentials({ ...credentials, [e.target.name]: e.target.value });
     }
-    const handleSubmit = async() => {
-        const response = await loginUser( credentials.email, credentials.password);
+    const handleSubmit = async () => {
+        const response = await loginUser(credentials.email, credentials.password);
         if (response.success)
-            alert("You have logged in successfully!");
+            props.showAlert("You have logged in successfully!", "success");
         else
-            alert(response.error);
+            props.showAlert(response.error, "danger");
     }
 
     return (

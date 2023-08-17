@@ -12,9 +12,6 @@ export default function BlogItems(props) {
     const [comment, setComment] = useState("");
 
 
-    const onChange = (e) => {
-        setComment(e.target.value);
-    }
     useEffect(() => {
 
         console.log("clicked post:", clickedPost);
@@ -30,10 +27,7 @@ export default function BlogItems(props) {
         getReactions(clickedPost);
     }, [clickedPost]);
 
-    const handleComment = async (global_id) => {
-        console.log("global_id:", global_id);
-        // Rest of the code for handling the comment
-    }
+   
     return (
         <>
 

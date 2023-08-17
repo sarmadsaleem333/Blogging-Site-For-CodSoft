@@ -1,12 +1,10 @@
 import React, { useRef, useContext, useState } from 'react'
 import Blog from './Blog'
-import { Alert } from './Alert';
 import postContext from '../context/postContext';
 
 
 
 export default function CreatePost() {
-    const [alertMessage, setAlertMessage] = useState(null);
     const closeRef = useRef(null);
     const context = useContext(postContext);
     const { uploadPost } = context;
@@ -29,12 +27,11 @@ export default function CreatePost() {
         formData.append("topic", blogCredentials.topic);
         formData.append("type", blogCredentials.type);
         const message = await uploadPost(formData);
-        setAlertMessage(message); 
+        setblogCredentials({ topic: "", text: "", type: "", image: "" }); 
         closeRef.current.click();
     }
     return (
         <div>
-            {alertMessage && <Alert message={alertMessage} />}
             <div className="modal fade" id="create-post-model" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div className="modal-dialog">
                     <div className="modal-content">
