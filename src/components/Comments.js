@@ -1,12 +1,15 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import reactionContext from '../context/reaction/reactionContext';
-import userContext from '../context/usercontext/userContext';
+import alertContext from '../context/alert/alertContext';
 export default function Comments(props) {
     const closeRef = useRef(null);
 
     const { id } = props;
     const context = useContext(reactionContext);
     const { getReactions, reactions, addReaction } = context;
+    const alertcontext = useContext(alertContext);
+    const { showAlert } = alertcontext;
+
     const [comment, setComment] = useState("");
     const onChange = (e) => {
         setComment(e.target.value);
@@ -18,20 +21,23 @@ export default function Comments(props) {
 
     const handleComment = async () => {
 
-            const response = await addReaction(id, comment);
-            if (response.ok) {
-                console.log("You added a comment on this post");
-            }
-            else {
-                console.log("Error adding a comment")
-            }
-            closeRef.current.click();
-            setComment("")
-    
+        const response = await addReaction(id, comment);
+        if(comment===""){
+             showAlert("Type something to add comment","danger")
         }
+        else if (response.ok) {
+            showAlert("You added a comment on this post", "success");
+        }
+        else {
+            showAlert("Error adding a comment", "danger")
+        }
+        closeRef.current.click();
+        setComment("")
+
+    }
 
 
-    
+
 
     return (
 
@@ -64,7 +70,7 @@ export default function Comments(props) {
                 </div>
                 <div className="modal-footer">
                     <button type="button" className="btn btn-secondary" ref={closeRef} data-bs-dismiss="modal">Close</button>
-                    <button type="button" className="btn btn-primary"  name='comment' onClick={() => handleComment()} >Post Comment</button>
+                    <button type="button" className="btn btn-primary" name='comment' onClick={() => handleComment()} >Post Comment</button>
                 </div>
             </div>
 

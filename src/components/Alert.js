@@ -25,9 +25,7 @@ function Alert() {
     const { alert} = alertcontext;
   
     const capitalize = (word) => {
-        if (word === "danger") {
-            word = "error";
-        }
+      
         if (!word) {
             return "";
         }

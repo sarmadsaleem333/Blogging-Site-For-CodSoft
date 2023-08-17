@@ -13,7 +13,7 @@ const PostState = (props) => {
         const result = await axios.post(`${host}/blogging/posts/addpost`, formData, {
             headers: {
                 "Content-Type": "multipart/form-data",
-                "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjRkNGIyNmY1MWE5NjU4NjVmY2Q4MzFiIn0sImlhdCI6MTY5MTg0MTA5OH0.-wTE1TlC6goGSg89xElnQLalm61gorog0f2vJVHbPzI",
+                "auth-token": localStorage.getItem("token"),
             }
         })
         return result.data;
@@ -22,7 +22,7 @@ const PostState = (props) => {
         let response = await axios.get(`${host}/blogging/posts/getallposts`, {
             headers: {
                 "Content-Type": "multipart/form-data",
-                "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjRkNGIyNmY1MWE5NjU4NjVmY2Q4MzFiIn0sImlhdCI6MTY5MTg0MTA5OH0.-wTE1TlC6goGSg89xElnQLalm61gorog0f2vJVHbPzI",
+                "auth-token": localStorage.getItem("token"),
             }
         })
         setPosts(response.data);
@@ -31,7 +31,7 @@ const PostState = (props) => {
         let response = await axios.get(`${host}/blogging/posts/getpostofrequiredid/${id}`, {
             headers: {
                 "Content-Type": "multipart/form-data",
-                "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjRkNGIyNmY1MWE5NjU4NjVmY2Q4MzFiIn0sImlhdCI6MTY5MTg0MTA5OH0.-wTE1TlC6goGSg89xElnQLalm61gorog0f2vJVHbPzI",
+                "auth-token": localStorage.getItem("token"),
             }
         })
         setrequiredPost(response.data);
@@ -40,7 +40,7 @@ const PostState = (props) => {
         let response = await axios.get(`${host}/blogging/posts/getmyposts`, {
             headers: {
                 "Content-Type": "multipart/form-data",
-                "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjRkNGIyNmY1MWE5NjU4NjVmY2Q4MzFiIn0sImlhdCI6MTY5MTg0MTA5OH0.-wTE1TlC6goGSg89xElnQLalm61gorog0f2vJVHbPzI",
+                "auth-token": localStorage.getItem("token"),
             }
         })
 
@@ -50,7 +50,7 @@ const PostState = (props) => {
         const result = await axios.get(`${host}/blogging/search/searchitems/?q=${query}`, {
             headers: {
                 "Content-Type": "multipart/form-data",
-                "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjRkNGIyNmY1MWE5NjU4NjVmY2Q4MzFiIn0sImlhdCI6MTY5MTg0MTA5OH0.-wTE1TlC6goGSg89xElnQLalm61gorog0f2vJVHbPzI",
+                "auth-token": localStorage.getItem("token"),
             }
         })
 
@@ -64,7 +64,7 @@ const PostState = (props) => {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",
-                    "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjRkNGIyNmY1MWE5NjU4NjVmY2Q4MzFiIn0sImlhdCI6MTY5MTg0MTA5OH0.-wTE1TlC6goGSg89xElnQLalm61gorog0f2vJVHbPzI",
+                    "auth-token": localStorage.getItem("token"),
                 }
             });
             return response;
@@ -76,7 +76,7 @@ const PostState = (props) => {
         const result = await axios.put(`${host}/blogging/posts/editpost/${id}`, formData, {
             headers: {
                 "Content-Type": "multipart/form-data",
-                "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjRkNGIyNmY1MWE5NjU4NjVmY2Q4MzFiIn0sImlhdCI6MTY5MTg0MTA5OH0.-wTE1TlC6goGSg89xElnQLalm61gorog0f2vJVHbPzI",
+                "auth-token": localStorage.getItem("token"),
             }
         })
         return result.data;

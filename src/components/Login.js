@@ -1,8 +1,10 @@
 import React, { useContext, useState } from 'react'
 import userContext from '../context/usercontext/userContext';
 import alertContext from '../context/alert/alertContext';
+import { useNavigate } from 'react-router-dom';
 
 export default function Login() {
+    const navigate = useNavigate();
     const context = useContext(userContext);
     const { loginUser } = context;
     const alertcontext = useContext(alertContext);
@@ -13,8 +15,11 @@ export default function Login() {
     }
     const handleSubmit = async () => {
         const response = await loginUser(credentials.email, credentials.password);
-        if (response.success)
+        if (response.success) {
             showAlert("You have logged in successfully!", "success");
+            localStorage.setItem("token", response.authtoken);
+            navigate("/");
+        }
         else
             showAlert(response.error, "danger");
     }

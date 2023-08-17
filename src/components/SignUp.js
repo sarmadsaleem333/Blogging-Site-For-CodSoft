@@ -2,11 +2,14 @@ import React, { useContext } from 'react'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import userContext from '../context/usercontext/userContext';
+import alertContext from '../context/alert/alertContext';
 
 export default function SignUp() {
-
+    const navigate = useNavigate();
     const context = useContext(userContext);
     const { signUp } = context;
+    const alertcontext = useContext(userContext);
+    const { alert, showAlert } = alertcontext;
     const [credentials, setCredentials] = useState({ name: "", email: "", password: "", phone: "", confirmPassword: "" });
     const onChange = (e) => {
         setCredentials({ ...credentials, [e.target.name]: e.target.value });
@@ -16,8 +19,11 @@ export default function SignUp() {
             return alert("Your Password and Confirm Password did not match")
         }
         const response = await signUp(credentials.name, credentials.email, credentials.password, credentials.phone);
-        if (response.success)
+        if (response.success) {
             alert("Successfully Your account has been created");
+            localStorage.setItem("token", response.authtoken);
+            navigate("/");
+        }
         else
             alert(response.error);
     }

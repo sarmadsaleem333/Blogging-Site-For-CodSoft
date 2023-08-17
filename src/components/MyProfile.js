@@ -1,13 +1,18 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import userContext from '../context/usercontext/userContext';
 import postContext from '../context/postContext';
+import alertContext from '../context/alert/alertContext';
 export default function MyProfile() {
-  
-  const closeRef = useRef(null);
+
+  const closeEditModalRef = useRef(null);
+  const closeDeleteModalRef = useRef(null);
   const context = useContext(userContext);
   const { fetchuser, userDetails } = context;
   const context2 = useContext(postContext);
   const { myPosts, getMyPosts, deletePost, editPost } = context2;
+  const alertcontext = useContext(alertContext);
+  const { showAlert } = alertcontext;
+
   const [blogCredentials, setblogCredentials] = useState({ topic: "", text: "", type: "", image: "" });
   const onChange = (e) => {
     setblogCredentials({ ...blogCredentials, [e.target.name]: e.target.value });
@@ -15,7 +20,7 @@ export default function MyProfile() {
   const onImageChange = (e) => {
     setblogCredentials({ ...blogCredentials, image: e.target.files[0] });
   };
- 
+
   const handleEdit = async (id) => {
     // e.preventDefault();
     const formData = new FormData();
@@ -24,8 +29,8 @@ export default function MyProfile() {
     formData.append("topic", blogCredentials.topic);
     formData.append("type", blogCredentials.type);
     const message = await editPost(formData, id);
-    closeRef.current.click();
-    console.log(message)
+    closeEditModalRef.current.click();
+    showAlert(message,"success")
   }
   useEffect(() => {
     // Fetch user details
@@ -42,8 +47,8 @@ export default function MyProfile() {
     console.log(id)
     const response = await deletePost(id);
     const message = await response.text();
-    console.log(message)
-    closeRef.current.click();
+    showAlert(message,"danger")
+    closeDeleteModalRef.current.click();
 
 
 
@@ -84,8 +89,8 @@ export default function MyProfile() {
                           <i className="fa-solid fa-comment" style={{ cursor: 'pointer' }} data-bs-toggle="modal" data-bs-target="#add-comment"></i>
                           <div className="btn-primary btn my-2">Read More</div>
                           <div className='d-flex'>
-                            <i class="fa-solid fa-pen-to-square" style={{ cursor: 'pointer' }}  data-bs-toggle="modal" data-bs-target={`#edit-Modal__${post._id}`}></i>
-                            <i class="fa-solid fa-trash mx-4" style={{ cursor: 'pointer' }}  data-bs-toggle="modal" data-bs-target={`#delete-Modal__${post._id}`}></i>
+                            <i class="fa-solid fa-pen-to-square" style={{ cursor: 'pointer' }} data-bs-toggle="modal" data-bs-target={`#edit-Modal__${post._id}`}></i>
+                            <i class="fa-solid fa-trash mx-4" style={{ cursor: 'pointer' }} data-bs-toggle="modal" data-bs-target={`#delete-Modal__${post._id}`}></i>
                           </div>
                         </div>
                       </div>
@@ -115,25 +120,25 @@ export default function MyProfile() {
                       </div>
 
                       <div className="modal-footer">
-                      <button type="button" class="btn btn-secondary" ref={closeRef} data-bs-dismiss="modal">Close</button>
-                        <button type="button" className="btn btn-primary" onClick={()=>handleEdit(post._id)}>Edit The Changes Made</button>
+                        <button type="button" class="btn btn-secondary" ref={ closeEditModalRef } data-bs-dismiss="modal">Close</button>
+                        <button type="button" className="btn btn-primary" onClick={() => handleEdit(post._id)}>Edit The Changes Made</button>
                       </div>
                     </div>
                   </div>
                 </div>
-                <div class="modal fade" id={`delete-Modal__${post._id}`}  tabindex="-1" aria-labelledby="deleteModal" aria-hidden="true">
+                <div class="modal fade" id={`delete-Modal__${post._id}`} tabindex="-1" aria-labelledby="deleteModal" aria-hidden="true">
                   <div class="modal-dialog">
                     <div class="modal-content">
                       <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">Deleting your Blog</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"  aria-label="Close"></button>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                       </div>
                       <div class="modal-body">
                         Are you sure you want to delete it ?
                       </div>
                       <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" ref={closeRef} data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary" onClick={()=>handleDelete(post._id)}>Delete</button>
+                        <button type="button" class="btn btn-secondary" ref={closeDeleteModalRef} data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" onClick={() => handleDelete(post._id)}>Delete</button>
                       </div>
                     </div>
                   </div>

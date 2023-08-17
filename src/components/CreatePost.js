@@ -33,7 +33,6 @@ export default function CreatePost() {
         const message = await uploadPost(formData);
         setblogCredentials({ topic: "", text: "", type: "", image: "" });
         showAlert(message, "success");
-
         closeRef.current.click();
     }
     return (
