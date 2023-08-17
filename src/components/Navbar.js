@@ -50,6 +50,9 @@ export default function Navbar() {
                     <li className=" mx-2">
                         <Link type="button" className={`btn btn-light ${location.pathname === "/signup" ? "active" : ""}`} to="/signup">Sign Up</Link>
                     </li>
+                    <li className=" ">
+                        <Link type="button" className={`btn btn-light ${location.pathname === "/login" ? "active" : ""}`} to="login"> Login </Link>
+                    </li>
                 </div>
             </div>
         </nav>

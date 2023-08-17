@@ -42,21 +42,33 @@ const UserState = (props) => {
         setName(json);
     }
 
-    const signUp = async (name,email,password,phone) => {
+    const signUp = async (name, email, password, phone) => {
         const response = await fetch(`${host}/blogging/auth/createuser`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({ name: name, phone:phone,email: email, password: password })
+            body: JSON.stringify({ name: name, phone: phone, email: email, password: password })
         });
-        const json=await response.json();
+        const json = await response.json();
+        return json;
+    }
+    const loginUser = async ( email, password) => {
+        const response = await fetch(`${host}/blogging/auth/loginuser`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({  email: email, password: password })
+        });
+        const json = await response.json();
         return json;
 
     }
 
+
     return (
-        <userContext.Provider value={{ fetchuser, userDetails, fetchallusers, users, getName, name,signUp }}>
+        <userContext.Provider value={{ fetchuser, userDetails, fetchallusers, users, getName, name, signUp,loginUser }}>
             {props.children}
         </userContext.Provider>
     )

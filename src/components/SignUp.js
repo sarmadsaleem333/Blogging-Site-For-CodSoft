@@ -12,7 +12,7 @@ export default function SignUp() {
         setCredentials({ ...credentials, [e.target.name]: e.target.value });
     }
     const handleSubmit = async () => {
-        if (credentials.password != credentials.confirmPassword) {
+        if (credentials.password !== credentials.confirmPassword) {
             return alert("Your Password and Confirm Password did not match")
         }
         const response = await signUp(credentials.name, credentials.email, credentials.password, credentials.phone);
@@ -23,7 +23,7 @@ export default function SignUp() {
     }
     return (
         <div className='d-flex flex-column justify-content-center my-3 '>
-            <div className='align-self-center'> <h3>Sign Up as User</h3> </div>
+            <div className='align-self-center'> <h3>Sign Up </h3> </div>
             <div class="input-group mb-3">
                 <span class="input-group-text">Name</span>
                 <input type="text" aria-label="First name" class="form-control" name='name' value={credentials.name} onChange={onChange} />
