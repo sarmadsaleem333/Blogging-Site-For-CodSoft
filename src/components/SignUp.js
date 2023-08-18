@@ -17,17 +17,18 @@ export default function SignUp() {
         setCredentials({ ...credentials, [e.target.name]: e.target.value });
     }
     const handleSubmit = async () => {
+   
         if (credentials.password !== credentials.confirmPassword) {
-            return showAlert("Your Password and Confirm Password did not match")
+            return showAlert("Your Password and Confirm Password did not match","danger")
         }
         const response = await signUp(credentials.name, credentials.email, credentials.password, credentials.phone);
         if (response.success) {
-            showAlert("Successfully Your account has been created");
+            showAlert("Successfully Your account has been created","success");
             localStorage.setItem("token", response.authtoken);
             navigate("/");
         }
         else
-        showAlert(response.error);
+        showAlert(response.error,"danger");
     }
     return (
         <div className='d-flex flex-column justify-content-center my-3 '>

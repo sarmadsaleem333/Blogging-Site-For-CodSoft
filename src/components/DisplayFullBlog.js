@@ -19,7 +19,7 @@ export default function DisplayFullBlog(props) {
         <div className="card-body d-flex flex-column h-100">
           <h5 className="card-title">{requiredPost.topic}</h5>
           <p className="card-text">{requiredPost.text}</p>
-          <p className="card-text"><small className="text-muted">By {requiredPost.user_name} on {requiredPost.date.slice(0, 10)}</small></p>
+          {/* <p className="card-text"><small className="text-muted">By {requiredPost.user_name} on {requiredPost.date.slice(0, 10)}</small></p> */}
         </div>
       </div>
     </div>

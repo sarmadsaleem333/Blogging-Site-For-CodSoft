@@ -30,6 +30,7 @@ export default function MyProfile() {
     formData.append("type", blogCredentials.type);
     const message = await editPost(formData, id);
     closeEditModalRef.current.click();
+    setblogCredentials({ topic: "", text: "", type: "", image: "" });
     showAlert(message, "success")
   }
   useEffect(() => {
@@ -85,9 +86,7 @@ export default function MyProfile() {
                         <div className="card-body d-flex flex-column h-100">
                           <h5 className="card-title">{post.topic}</h5>
                           <p className="card-text">{post.text.slice(0, 100)}...</p>
-                          <p className="card-text"><small className="text-muted">Last updated 3 mins ago</small></p>
-                          <i className="fa-solid fa-comment" style={{ cursor: 'pointer' }} data-bs-toggle="modal" data-bs-target="#add-comment"></i>
-                          <div className="btn-primary btn my-2">Read More</div>
+                          <p className="card-text"><small className="text-muted">By {post.user_name} on {post.date.slice(0, 10)} </small></p>
                           <div className='d-flex'>
                             <i class="fa-solid fa-pen-to-square" style={{ cursor: 'pointer' }} data-bs-toggle="modal" data-bs-target={`#edit-Modal__${post._id}`}></i>
                             <i class="fa-solid fa-trash mx-4" style={{ cursor: 'pointer' }} data-bs-toggle="modal" data-bs-target={`#delete-Modal__${post._id}`}></i>
