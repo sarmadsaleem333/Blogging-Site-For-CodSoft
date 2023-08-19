@@ -7,7 +7,7 @@ const User = require("../Models/User");
 const fetchuser = require("../Middleware/fetchuser");
 const multer = require("multer");
 
-const JWT_secret = "Supeb facebook clone by MSS"  // For auth token
+ const JWT_secret = ""  //add auth token string For auth token
 
 // store image in src/images folder which the user will upload and storing the image name with suffix of date
 // and storing image name in data base

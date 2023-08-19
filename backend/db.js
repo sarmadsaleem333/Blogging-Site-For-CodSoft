@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
-const mongoURI = "add your url here";
-
+const mongoURI = ""; //ad your url here of mongodb string
 const connectToMongo = () => {
     mongoose.connect(mongoURI)
         .then(() => {
