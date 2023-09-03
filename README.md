@@ -1,6 +1,7 @@
 <<<<<<< HEAD
+Please make sure to make a public/images folder in backend too to handle upload of images
 # Getting Started with Create React App
-
+Befor
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 Make sure to add images folder in src
 ## Available Scripts
@@ -73,3 +74,4 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 # CodSoft-InternShip-Task
 CodSoft Internship Task on Web Development using MERN Stack one if BLogging Website and other is Online Learning Platform
 >>>>>>> origin/master
+
