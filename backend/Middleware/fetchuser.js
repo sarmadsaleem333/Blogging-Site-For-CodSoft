@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');  // export for web token which is used for authentication for further routes
-const JWT_secret = ""  //add auth token string For auth token
+//  const JWT_secret = " " // add your secret here
 const fetchuser = (req, res, next) => {
 
     const token = req.header("auth-token");
